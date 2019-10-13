@@ -24,6 +24,7 @@ export default class CameraPage extends React.Component {
 
   handleShortCapture = async () => {
     const photoData = await this.camera.current.takePictureAsync();
+
     this.setState(
       {
         capturing: false,

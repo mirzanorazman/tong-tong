@@ -1,29 +1,9 @@
 import React from "react";
 import { View, Text, Image, Button } from "react-native";
+import * as ImageManipulator from "expo-image-manipulator";
 
 import styles from "./styles";
 import { create } from "uuid-js";
-
-const createFormData = (photo, body) => {
-  const data = new FormData();
-
-  data.append("file", {
-    // name: photo.fileName,
-    // type: photo.type,
-    // uri:
-    //   Platform.OS === "android" ? photo.uri : photo.uri.replace("file://", "")
-    uri: photo.uri.replace("file://", "")
-    // uri: photo.uri
-  });
-
-  Object.keys(body).forEach(key => {
-    data.append(key, body[key]);
-  });
-
-  console.log(data);
-
-  return data;
-};
 
 class ProcessedImagePage extends React.Component {
   static navigationOptions = {
@@ -34,27 +14,7 @@ class ProcessedImagePage extends React.Component {
     image: null
   };
 
-  // constructor(props) {
-  //   super(props);
-  // }
-
-  // componentDidMount() {
-  //   const { navigation } = this.props;
-  //   this.captures = navigation.getParam("captures");
-  //   const captures = this.props.navigation.getParam("captures");
-  //   this.setState({ image: captures[0] });
-  //   console.log(this.state);
-  // }
-
   uploadImageHandler = capture => {
-    // console.log("HERE");
-    // console.log(capture.uri);
-
-    // console.log(
-    //   JSON.stringify({
-    //     file: capture.uri
-    //   })
-    // );
     let localUri = capture.uri;
     let filename = localUri.split("/").pop();
 
@@ -63,7 +23,12 @@ class ProcessedImagePage extends React.Component {
     let type = match ? `image/${match[1]}` : `image`;
 
     let formData = new FormData();
-    formData.append("file", { uri: localUri, name: filename, type });
+    formData.append("file", {
+      uri: localUri,
+      name: filename,
+      type,
+      resizeNrotate: true
+    });
 
     fetch("http://35.0.46.81:5000/upload_image", {
       method: "POST",
