@@ -11,3 +11,5 @@ web-build/
 web-report/
 .DS_Store
 .log
+.vscode
+__pycache__

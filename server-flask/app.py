@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 import pytesseract
 from PIL import Image
 app = Flask(__name__)
+from parse import process_image
 
 pytesseract.pytesseract.tesseract_cmd = r'/usr/local/Cellar/tesseract/4.1.0/bin/tesseract'
 
@@ -20,6 +21,7 @@ def hello_world():
 @app.route('/upload_image', methods= ['POST'])
 def upload_image():
     # check if the post request has the file part
+    print (request.files)
     if 'file' not in request.files:
       response = jsonify({'message' : 'No file part in the request key'})
       response.status_code = 400
@@ -35,11 +37,9 @@ def upload_image():
     
     # if file is valid
     if file and allowed_file(file.filename):
-      # response = jsonify({'message' : 'File successfully uploaded',
-      #                     'filename' : str(file)
-      #                   })
-      response = jsonify({"text": f"{pytesseract.image_to_string(Image.open(file))}"})
-      # response = jsonify({'message' : 'DAPAT FILE'})
+      # calls process_image to extract text from image into json
+      output = process_image(file)      
+      response = jsonify(output)
       response.status_code = 201
       return response
     
@@ -143,7 +143,7 @@ def mock_data():
     
 if __name__ == '__main__':
     app.debug = True
-    app.run()
+    app.run(host = '35.0.46.81')
 
 # app.py
 # from flask import Flask, request, jsonify
