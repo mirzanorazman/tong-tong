@@ -1,17 +1,18 @@
-## Tong-tong
+<h1 align="center">Tong-tong</h1>
+ 
 For most people, especially students, splitting bills is an everyday task. Unfortunately, it's not a fun one! So we said: let's make it easy!
 
-Tong-tong, derived from a Malaysian slang to mean "to share (expenses)", is a mobile app that lets you Snap & Split your bill.
+Tong-tong, derived from a _Malaysian_ slang to mean "to share (expenses)", is a mobile app that lets you Snap & Split your bill.
 
 ## Snap & Split: How It Works
-Tong-tong breaks down the bill-splitting process into two steps:  
+Tong-tong breaks down the bill-splitting process into __two steps__:  
 1) Snap a photo of your receipt/bill  
 2) Split your expenses among friends    
 
 In other words, you no longer have to manually add your expenses (re: Splitwise) - it does it for you! All that's left for you to do is identify who-paid-what.
 
 ## The Tech Behind Tong-tong
-The process of making the app can be split into 3 parts:  
+The process of making the app can be split into __3 parts__:  
 **1. The front end (Mirza)**     
 The app was built using React Native to access the device's camera to snap the photo of the receipt, and also device's photo gallery to access previously stored photo of the receipt. The front end also handles the parsed itemized bills from the OCR to show the summary and final calculation of the total expenditure. 
     
@@ -27,6 +28,9 @@ Initially, we deployed the server to Heroku, but because the Tessaract OCR libra
 ## Future plans
 One important feature that we did not implement is handwriting recognition. We realized that handwriting recognition is difficult to achieve in comparison to typed documents. So, a future plan would be to use Tensor Flow to build a machine learning model that could allow the app to recognize handwritten texts on the receipts. We want to also deploy the app live so that people can actually download it.
   
-**This project is a submission for MHacks 2019. Teammates are [Mirza Nor Azman](https://github.com/mirzanorazman), [Khairina Ibrahim](https://github.com/bintiibrahim), and [Mujahid Anuar](https://github.com/mujahidfa). All are/were students from University of Wisconsin-Madison.**
+**This project is a submission for [MHacks 2019](https://mhacks.org). Teammates are [Mirza Nor Azman](https://github.com/mirzanorazman), [Khairina Ibrahim](https://github.com/bintiibrahim), and [Mujahid Anuar](https://github.com/mujahidfa). At the time of the hackathon, all were students from University of Wisconsin-Madison.**
 
-Link to [Devpost](https://devpost.com/software/tong-tong).
+Here's the link to the [Devpost](https://devpost.com/software/tong-tong) submission.
+
+## Installation
+There's two parts to the project (backend and frontend) so head out to the READMEs for each parts for specific installation instructions.
