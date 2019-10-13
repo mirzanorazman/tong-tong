@@ -11,7 +11,14 @@ class ProcessedImagePage extends React.Component {
   };
 
   state = {
-    image: null
+    image: null,
+    response: null
+  };
+
+  navigationHandler = response => {
+    this.setState({ image: null, response: response }, () => {
+      this.props.navigation.navigate("Items", { items: this.state.response });
+    });
   };
 
   uploadImageHandler = capture => {
@@ -39,9 +46,7 @@ class ProcessedImagePage extends React.Component {
     })
       .then(response => response.json())
       .then(response => {
-        console.log("upload success", response);
-        alert("Upload success!");
-        this.setState({ image: null });
+        this.navigationHandler(response);
       })
       .catch(error => {
         console.log("upload error", error);

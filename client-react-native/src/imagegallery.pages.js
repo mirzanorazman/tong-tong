@@ -10,11 +10,20 @@ export default class ImagePickerExample extends React.Component {
   };
 
   state = {
-    image: null
+    image: null,
+    response: null
+  };
+
+  navigationHandler = response => {
+    // console.log(response);
+    // alert("Upload success!");
+    this.setState({ image: null, response: response }, () => {
+      this.props.navigation.navigate("Items", { items: this.state.response });
+    });
   };
 
   uploadImageHandler = capture => {
-    console.log(capture);
+    // console.log(capture);
     let localUri = capture;
     let filename = localUri.split("/").pop();
 
@@ -39,10 +48,15 @@ export default class ImagePickerExample extends React.Component {
     })
       .then(response => response.json())
       .then(response => {
-        console.log("upload success", response);
-        alert("Upload success!");
-        this.setState({ image: null });
+        this.navigationHandler(response);
       })
+      // .then(response => {
+      //   console.log("upload success", response);
+      //   alert("Upload success!");
+      //   this.setState({ image: null }, () => {
+      //     this.props.navigation.navigate("Items", { items: response });
+      //   });
+      // })
       .catch(error => {
         console.log("upload error", error);
         alert("Upload failed!");
@@ -100,7 +114,7 @@ export default class ImagePickerExample extends React.Component {
       aspect: [4, 3]
     });
 
-    console.log(result);
+    // console.log(result);
 
     if (!result.cancelled) {
       this.setState({ image: result.uri });
