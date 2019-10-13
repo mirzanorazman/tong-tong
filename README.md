@@ -28,7 +28,7 @@ Initially, we deployed the server to Heroku, but because the Tessaract OCR libra
 ## Future plans
 One important feature that we did not implement is handwriting recognition. We realized that handwriting recognition is difficult to achieve in comparison to typed documents. So, a future plan would be to use Tensor Flow to build a machine learning model that could allow the app to recognize handwritten texts on the receipts. We want to also deploy the app live so that people can actually download it.
   
-**This project is a submission for [MHacks 2019](https://mhacks.org). Teammates are [Mirza Nor Azman](https://github.com/mirzanorazman), [Khairina Ibrahim](https://github.com/bintiibrahim), and [Mujahid Anuar](https://github.com/mujahidfa). At the time of the hackathon, all were students from University of Wisconsin-Madison.**
+**This project is a submission for [MHacks 2019](https://mhacks.org). Teammates are [Mirza Nor Azman](https://github.com/mirzanorazman), [Khairina Ibrahim](https://github.com/bintiibrahim), and [Mujahid Anuar](https://github.com/mujahidfa). At the time of the hackathon, all are students from University of Wisconsin-Madison.**
 
 Here's the link to the [Devpost](https://devpost.com/software/tong-tong) submission.
 
