@@ -22,6 +22,7 @@ def hello_world():
 def upload_image():
     # check if the post request has the file part
     print (request.files)
+    print (request.get_json())
     if 'file' not in request.files:
       response = jsonify({'message' : 'No file part in the request key'})
       response.status_code = 400

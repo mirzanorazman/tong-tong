@@ -7,6 +7,17 @@ import json
 
 def process_image(file):
     image = _get_image(file)
+    width, height = image.size
+
+    # rotate image if taken from camera
+    if width > 1000:
+        image = image.transpose(Image.ROTATE_270)
+
+    # resize image
+    basewidth = 450
+    wpercent = (basewidth / float(image.size[0]))
+    hsize = int((float(image.size[1]) * float(wpercent)))
+    image = image.resize((basewidth, hsize), Image.ANTIALIAS)
 
     # pytesseract.pytesseract.tesseract_cmd = 'C:/Program Files/Tesseract-OCR/tesseract'
     # TESSDATA_PREFIX = 'C:/Program Files (x86)/Tesseract-OCR'
@@ -14,7 +25,6 @@ def process_image(file):
     image = image.filter(ImageFilter.SHARPEN)
     output = pytesseract.image_to_string(image)
 
-    print(output)
     # parse text into vector
     receipt = list(filter(None, output.splitlines()))
 
@@ -36,7 +46,7 @@ def process_image(file):
             title = clean[0:start].replace("$", "")
             title = re.sub(r'[^a-zA-Z\d\s:]+', '', title).strip().lower().capitalize()
 
-            price = clean[start:end]
+            price = float(clean[start:end])
             data['items'].append({ 'id' : i, 'name' : title, 'price' : price })
             i += 1
 
