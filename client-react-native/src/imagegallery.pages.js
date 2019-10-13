@@ -1,8 +1,9 @@
 import * as React from "react";
-import { Button, Image, View } from "react-native";
+import { Button, Image, View, Text, StyleSheet } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import Constants from "expo-constants";
 import * as Permissions from "expo-permissions";
+import { FontAwesome, Ionicons } from '@expo/vector-icons';
 
 export default class ImagePickerExample extends React.Component {
   static navigationOptions = {
@@ -53,23 +54,38 @@ export default class ImagePickerExample extends React.Component {
     let { image } = this.state;
 
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Button
-          title="Pick an image from camera roll"
-          onPress={this._pickImage}
-        />
+      <View style={styles.container}>
+        <Text style={styles.text}>Welcome!</Text>  
+        <Text style={styles.text}>Ready with your receipt?</Text>
+
+        <View style={styles.buttons}>
+          <FontAwesome.Button 
+            name="camera"
+            size={30}
+            onPress={() => {
+              this.props.navigation.navigate("Camera", {});
+            }}
+          >
+            Take a picture
+          </FontAwesome.Button>
+
+          <FontAwesome.Button 
+            name="plus"  
+            size={30}
+            onPress={this._pickImage}
+          >
+            Look in Gallery
+          </FontAwesome.Button>
+        </View>
+        
+
         {image && (
           <Image
             source={{ uri: image }}
             style={{ width: "80%", height: 200 }}
           />
         )}
-        <Button
-          title="Take Photo"
-          onPress={() => {
-            this.props.navigation.navigate("Camera", {});
-          }}
-        />
+        
         <Button
           title="Confirm"
           onPress={() => {
@@ -107,3 +123,26 @@ export default class ImagePickerExample extends React.Component {
     }
   };
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 15,
+    //alignItems: "column", 
+    // justifyContent: "center",
+    flexDirection: 'column'
+  },
+  buttons : {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignContent: 'space-around',
+    padding: 15,
+  },
+  items: {
+    flexDirection: 'row'
+  },
+  text: {
+    fontSize: 30,
+    alignSelf: "center"
+  }
+});
